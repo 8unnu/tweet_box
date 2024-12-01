@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Real-time Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+</head>
+<body>
+    <button id="con" onclick="connect()">Подключиться</button>
+    <ul id="messages"></ul>
+    <input id="messageInput" placeholder="Введите сообщение"/>
+    <button onclick="sendMessage()">Отправить</button>
+    <script>
+        var socket;
+        var button = document.getElementById("con")
+        var messages = document.getElementById('messages');
+
+        // Обработчики подключения к сокету и отключения
+        function connect() {
+            socket = io('http://localhost:8000');
+            button.disabled = true;
+
+            socket.on("message", function(data) {
+                console.log('Received a message from the server!', data);
+                let item = document.createElement('li');
+                item.textContent = data;
+                messages.appendChild(item);
+            });
+        };
+        function disconnect() {
+            socket.disconnect()
+            button.disabled = false;
+        }
+
+        // Отправка сообщения
+        function sendMessage() {
+            var messageInput = document.getElementById('messageInput');
+            var message = messageInput.value;
+
+            socket.emit("message", message);
+
+            let item = document.createElement('li');
+            item.textContent = 'Вы: ' + message;
+            messages.appendChild(item);
+
+            messageInput.value = '';
+        }
+
+        // Обработчик приёмник сообщений
+        // socket.on("message", function(data) {
+        //     console.log('Received a message from the server!', data);
+            // var messages = document.getElementById('messages');
+            // var item = document.createElement('li');
+            // item.textContent = data;
+            // messages.appendChild(item);
+        // });
+        // Обработчик нового сообщения от сервера
+        // socket.on('message', function (data) {
+        //     var messages = document.getElementById('messages');
+        //     var item = document.createElement('li');
+        //     item.textContent = data;
+        //     messages.appendChild(item);
+        // });
+
+        // Функция отправки сообщения
+        // function sendMessage() {
+        //     var messageInput = document.getElementById('messageInput');
+        //     var message = messageInput.value;
+
+        //     socket.emit('send_message', {"message": message});
+        //     // Добавляем введенное сообщение на веб-страницу
+        //     var messages = document.getElementById('messages');
+        //     var item = document.createElement('li');
+        //     item.textContent = 'Вы: ' + message;
+        //     messages.appendChild(item);
+        //     // Очищаем поля ввода
+        //     messageInput.value = '';
+        // }
+    </script>
+</body>
+</html>
