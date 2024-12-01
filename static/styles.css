@@ -1,63 +1,171 @@
 body {
     background-color: black;
 }
-.chat {
+#reg {
+    display: block;
     background-color: rgb(255, 255, 255);
-    border: 3px solid rgb(206, 206, 206);
+    border: 3px solid #02ed22;
+    height: 10vh;
+    width: 40vh;
+    position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+    z-index: 99;
+}
+#box {
+    display: none;
+    background-color: rgb(255, 255, 255);
+    border: 3px solid #02ed22;
     margin: 10px auto;
-    height: 850px;
-    width: 1000px;
-    word-break: break-all;
-    overflow-x: auto;
+    height: auto;
+    min-height: 100px;
+    width: 50vh;
     border-radius: 5px;
 }
-.chat div {
+#panel {
+    border-top: 3px solid #02ed22;
+}
+#chatbox {
+    height: 85vh;
+    width: 50vh;
+    word-break: break-word;
+    overflow-x: auto;
+}
+#chatbox div {
     clear: both;
     margin: 5px;
     padding: 5px;
-    border-radius: 0% 10px 10px 10px;
 }
-.chat div p {
+#chatbox div p {
     font-size: 25px;
     font-family: DejaVu Sans Mono, monospace;
-    color: white;
 }
-.chat div h1 {
+#chatbox div h1 {
     font-size: 15px;
     font-family: DejaVu Sans Mono, monospace;
-    color: white;
     margin-bottom: 5px;
 }
-.chat div h4 {
+#chatbox div h4 {
     font-size: 10px;
     font-family: DejaVu Sans Mono, monospace;
-    color: white;
     margin-top: 5px;
     float: right;
 }
+#chatbox::-webkit-scrollbar {
+    width: 5px;
+    background-color: #f9f9fd;
+}
+#chatbox::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    margin-right: 5px;
+    background-color: #019916;
+}
 .you_mess {
-    float: left;
-    background-color: #63bed5;
+    color: white;
+    float: right;
+    background-color: #148e00;
+    border-radius: 10px 0px 10px 10px;
 }
 .nyou_mess {
+    color: white;
     float: left;
-    background-color: #437dba;
+    background-color: #029b42;
+    border-radius: 0px 10px 10px 10px;
 }
 
-/* .chat p {
-    clear: both;
-    font-size: 25px;
-    margin: 5px;
-    padding: 5px;
-    border: 2px solid #c3c4c4;
-    font-family: Comic Sans MS, Comic Sans, cursive;
-    color: white;
-} */
-/* .you {
-    float: right;
-    background-color: #63bed5;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  outline: none;
 }
-.nyou {
-    float: left;
-    background-color: #437dba;
+
+.register {
+  margin: 0 auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.field {
+  width: 100%;
+  height: 9.5vh;
+  position: relative;
+}
+.field input {
+  width: 100%;
+  border: 0;
+  height: 100%;
+  padding: 10px;
+  padding: 20px 0 0 16px;
+  font-size: 0;
+  background: hsl(128, 98%, 47%);
+  transition: background 0.3s ease;
+  color: #ffffff;
+}
+.field input:focus {
+  background: #00531c;
+  font-size: 23px;
+}
+/* .field input:focus::-moz-selection {
+  background: rgba(188, 232, 255, 0.5);
+}
+.field input:focus::selection {
+  background: rgba(188, 232, 255, 0.5);
 } */
+.field input.active {
+  background: #006b36;
+  font-size: 23px;
+}
+.field input,
+.field button {
+  position: absolute;
+}
+.field button {
+  background: rgba(0, 0, 0, 0.3);
+  right: 0;
+  border: 0;
+  width: 115px;
+  height: 100%;
+  border-radius: 6px;
+  font-size: 22px;
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  color: #24b706;
+}
+.field button.active {
+  color: #ffffff;
+  background: #639EDB;
+  opacity: 1;
+  pointer-events: auto;
+}
+.field button.active:hover {
+  background: #5E99D6;
+}
+.field button.full {
+  width: 100%;
+}
+.field input:focus + label {
+  font-size: 19px;
+  transform: translate(16px, 11px);
+  color: rgba(255, 255, 255, 0.7);
+}
+.field label {
+  position: absolute;
+  color: white;
+  transform: translate(16px, 20px);
+  transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s 0.1s ease;
+  font-size: 28px;
+}
+.field label.active {
+  font-size: 19px;
+  transform: translate(16px, 11px);
+  color: rgba(255, 255, 255, 0.7);
+}
+.field input:focus + label + button {
+  opacity: 1;
+}

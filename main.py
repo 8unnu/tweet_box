@@ -20,23 +20,25 @@ app.mount('/static', StaticFiles(directory="static"))
 sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
 socket_app = socketio.ASGIApp(sio, app)
 
+users = {
+    "jack": "000a"
+}
 @sio.event
 async def connect(sid, env):
-    await sio.enter_room(sid, room="lobby")
     logger.info(f"Client: {sid} has connect")
 
 @sio.on("message")
 async def message(sid, data):
-    await sio.emit('message', data, room="lobby", skip_sid=sid)
-    logger.info(f"{sid} say {data}")
+    await sio.emit('message', [data['username'], data['message']], skip_sid=sid)
+    logger.info(f"{sid}({data['username']}) say {data['message']}")
 
 @sio.event
 async def disconnect(sid):
-    await sio.leave_room(sid, room="lobby")
     logger.info(f"Client: {sid} has disconnect")
 
 @app.get("/")
 async def index(request: Request):
+    headers = request.headers.get("Authorization")
     context = {
         "request": request
     }
