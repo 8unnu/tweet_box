@@ -15,29 +15,15 @@
         <div id="chatbox">
         </div>
         <div id="panel">
-            <!-- <input id="messageInput" placeholder="Введите сообщение"/>
-            <button onclick="sendMessage()"><i class="bi bi-arrow-right"></i></button> -->
-            <div class="register">
-                <div class="field">
-                    <input id="messageInput"/>
-                    <label for="register">
-                        <span>Введите сообщение</span>
-                    </label>
-                    <button onclick="sendMessage()"><i class="bi bi-arrow-right"></i></button>
-                </div>
-            </div>
+            <input id="messageInput" placeholder="Введите сообщение"/>
+            <button onclick="sendMessage()"><i class="bi bi-arrow-right"></i></button>
         </div>
     </div>
     <div id="reg">
-        <div class="register">
-            <div class="field">
-                <input id="username"/>
-                <label for="register">
-                    <span>Введите имя</span>
-                </label>
-                <button id="conButton" onclick="connect()"><i class="bi bi-box-arrow-in-right"></i></button>
-            </div>
-        </div>
+        <form>
+            <input id="username" placeholder="Введите имя"/>
+            <button id="conButton" onclick="connect()"><i class="bi bi-box-arrow-in-right"></i></button>
+        </form>
     </div>
     <script>
         var socket;

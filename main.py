@@ -20,9 +20,6 @@ app.mount('/static', StaticFiles(directory="static"))
 sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
 socket_app = socketio.ASGIApp(sio, app)
 
-users = {
-    "jack": "000a"
-}
 @sio.event
 async def connect(sid, env):
     logger.info(f"Client: {sid} has connect")
@@ -38,7 +35,6 @@ async def disconnect(sid):
 
 @app.get("/")
 async def index(request: Request):
-    headers = request.headers.get("Authorization")
     context = {
         "request": request
     }
