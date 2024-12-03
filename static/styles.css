@@ -117,6 +117,16 @@ body {
   background-color: #029b42;
   border-radius: 0px 10px 10px 10px;
 }
+.system {
+  color: rgb(99, 99, 99);
+  text-align: center;
+}
+.system h1 {
+  font-size: 50px;
+}
+.system p {
+  font-size: 35px;
+}
 
 .form {
   color: white;
